@@ -16,10 +16,10 @@
 # permissions and limitations under the License.
 
 executable = wrapper
-arguments  = $Fnx(input) 1.0e16
+arguments  = $Fnx(input) $(munit)
 
 transfer_executable    = False
-transfer_input_files   = bin/,$F(input)
+transfer_input_files   = bin/,$(input)
 transfer_output_remaps = "spectrum.h5=out/$Fn(input)_$(Step).h5;grmonty.par=out/$Fn(input)_$(Step).par"
 
 output = log/$Fn(input)_$(Step).out
@@ -34,4 +34,4 @@ request_cpus   = 1
 on_exit_hold     = (ExitBySignal == True) || (ExitCode != 0)
 periodic_release = (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
-queue 8 input matching files dat/*.h5
+queue 8 input,munit from bin/pargen |
