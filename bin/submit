@@ -30,11 +30,11 @@ arguments  = $Fnx(input) $(munit)
 
 transfer_executable    = False
 transfer_input_files   = bin/,$(input)
-transfer_output_remaps = "spectrum.h5=out/$Fn(input)_$(munit)_$(Step).h5;grmonty.par=out/$Fn(input)_$(munit)_$(Step).par"
+transfer_output_remaps = "spectrum.h5=out/$Fn(input).$(munit)_$(Step).h5;grmonty.par=out/$Fn(input).$(munit)_$(Step).par"
 
-output = log/$Fn(input)_$(munit)_$(Step).out
-error  = log/$Fn(input)_$(munit)_$(Step).err
-log    = log/$Fn(input)_$(munit)_$(Step).log
+output = log/$Fn(input).$(munit)_$(Step).out
+error  = log/$Fn(input).$(munit)_$(Step).err
+log    = log/$Fn(input).$(munit)_$(Step).log
 
 universe       = vanilla
 request_memory = 1 GB
