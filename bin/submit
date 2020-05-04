@@ -15,10 +15,11 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
-executable = bin/wrapper
+executable = wrapper
 arguments  = $Fnx(input) 1.0e16
 
-transfer_input_files   = bin,$F(input)
+transfer_executable    = False
+transfer_input_files   = bin/,$F(input)
 transfer_output_remaps = "spectrum.h5=out/$Fn(input)_$(Step).h5;grmonty.par=out/$Fn(input)_$(Step).par"
 
 output = log/$Fn(input)_$(Step).out
