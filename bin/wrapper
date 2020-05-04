@@ -31,7 +31,9 @@ M_unit="$3"
 TP_OVER_TE="${4:-3.0}" # NOTE that ':-' indicates the default '3.0'
 bias="${5:-0.5}"       # NOTE that ':-' indicates the default '0.5'
 
-cat <<EOF | tee "process_$PROCESS.par"
+PARFILE="process_$PROCESS.par"
+
+cat <<EOF | tee "$PARFILE"
 # Automatically generated \`grmonty\` parameter file
 
 fit_bias    1
@@ -47,3 +49,5 @@ TP_OVER_TE  ${TP_OVER_TE}
 dump        ${dump}
 spectrum    spectrum.h5
 EOF
+
+./grmonty -par "$PARFILE"
