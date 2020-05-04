@@ -30,9 +30,9 @@ arguments  = $Fnx(input) $(M_unit)
 
 transfer_executable    = False
 transfer_input_files   = bin/,$(input)
-transfer_output_remaps = "
-	grmonty.par=out/$Fn(input).grmonty_$(M_unit)_$(Step).par;
-	hotcross.dat=out/$Fn(input).hotcross_$(M_unit)_$(Step).dat;
+transfer_output_remaps = "\
+	grmonty.par=out/$Fn(input).grmonty_$(M_unit)_$(Step).par;\
+	hotcross.dat=out/$Fn(input).hotcross_$(M_unit)_$(Step).dat;\
 	spectrum.h5=out/$Fn(input).spectrum_$(M_unit)_$(Step).h5"
 
 output = log/$Fn(input).grmonty_$(M_unit)_$(Step).out
