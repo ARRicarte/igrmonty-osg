@@ -15,10 +15,18 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
-if test $# -eq 0; then
+if test $# -lt 3; then
 	cat <<EOF
 usage: $0 <process_id> <input> <M_unit> [Tp/Te] [init_bias_scale]
 a wrapper to run \`grmonty\` on the Open Science Grid with HTCondor
 EOF
 	exit 1
 fi
+
+set -e
+
+PROCESS="$1"
+dump="$2"
+M_unit="$3"
+TP_OVER_TE="${4:-3.0}" # NOTE that ':-' indicates the default '3.0'
+bias="${5:-0.5}"       # NOTE that ':-' indicates the default '0.5'
