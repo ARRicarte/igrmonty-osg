@@ -15,6 +15,16 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
+# This is a submission script for running `grmonty` on the Open
+# Science Grid with HTCondor.  It takes care file transfer, resuming,
+# and renaming.  It uses the `wrapper` script in the same "bin/"
+# directory within the `igrmonty-osg` git repository.  It can be
+# submitted normally with condor_submit:
+#
+#     condor_submit submit
+#
+# or run as a command directly `bin/submit`.
+
 executable = wrapper
 arguments  = $Fnx(input) $(munit)
 

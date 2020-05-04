@@ -15,6 +15,13 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
+# This is a wrapper script for running `grmonty` on the Open Science
+# Grid with HTCondor.  Note that `grmonty` accept more options via a
+# paramter file, compare to command line arguments.  Hence, this
+# wrapper takes command line arguments, turn them into a `grmonty`
+# parameter file "grmonty.par" through a template, and then run
+# `grmonty -par grmonty.par` to fully configure `grmonty`.
+
 if test $# -lt 2; then
 	cat <<EOF
 usage: $0 <input> <M_unit> [Tp/Te] [init_bias_scale]
