@@ -15,6 +15,22 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
-executable = wrapper
+executable = bin/wrapper
+arguments  = $Fnx(input) 1.0e16
 
-transfer_input_files = bin/wrapper
+transfer_input_files   = bin,$F(input)
+transfer_output_remaps = "spectrum.h5=out/$Fn(input)_$(Step).h5"
+
+output = log/$Fn(input)_$(Step).out
+error  = log/$Fn(input)_$(Step).err
+log    = log/$Fn(input)_$(Step).log
+
+universe       = vanilla
+request_memory = 1 GB
+request_disk   = 1 GB
+request_cpus   = 1
+
+on_exit_hold     = (ExitBySignal == True) || (ExitCode != 0)
+periodic_release = (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
+
+queue 8 input matching files dat/*.h5
