@@ -26,15 +26,15 @@
 # or run as a command directly `bin/submit`.
 
 executable = wrapper
-arguments  = $Fnx(input) $(munit)
+arguments  = $Fnx(input) $(M_unit)
 
 transfer_executable    = False
 transfer_input_files   = bin/,$(input)
-transfer_output_remaps = "spectrum.h5=out/$Fn(input).$(munit)_$(Step).h5;grmonty.par=out/$Fn(input).$(munit)_$(Step).par"
+transfer_output_remaps = "spectrum.h5=out/$Fn(input).$(M_unit)_$(Step).h5;grmonty.par=out/$Fn(input).$(M_unit)_$(Step).par"
 
-output = log/$Fn(input).$(munit)_$(Step).out
-error  = log/$Fn(input).$(munit)_$(Step).err
-log    = log/$Fn(input).$(munit)_$(Step).log
+output = log/$Fn(input).$(M_unit)_$(Step).out
+error  = log/$Fn(input).$(M_unit)_$(Step).err
+log    = log/$Fn(input).$(M_unit)_$(Step).log
 
 universe       = vanilla
 request_memory = 1 GB
@@ -44,4 +44,4 @@ request_cpus   = 1
 on_exit_hold     = (ExitBySignal == True) || (ExitCode != 0)
 periodic_release = (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
-queue 8 input,munit from bin/pargen |
+queue 8 input,M_unit from bin/pargen |
