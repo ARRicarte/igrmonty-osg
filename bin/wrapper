@@ -31,7 +31,7 @@ EOF
 fi
 
 set -e
-ulimit -s 16384
+#ulimit -s 16384
 
 dump="$1"
 M_unit="$2"
