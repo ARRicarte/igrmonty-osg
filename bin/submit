@@ -45,6 +45,6 @@ request_disk   = 1 GB
 request_cpus   = 1
 
 on_exit_hold     = (ExitBySignal == True) || (ExitCode < 0)
-periodic_release = (NumJobStarts < 5) && ((CurrentTime - EnteredCurrentStatus) > 60)
+periodic_release = (NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
 queue 8 input,M_unit from bin/pargen |
