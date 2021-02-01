@@ -26,18 +26,18 @@
 # or run as a command directly `bin/submit`.
 
 executable = wrapper
-arguments  = $Fnx(input) $(M_unit)
+arguments  = $Fnx(input) $(M_unit) $(R_high) $(bias)
 
 transfer_executable    = False
 transfer_input_files   = bin/,$(input)
 transfer_output_remaps = "\
-	grmonty.par=out/$Fn(input).grmonty_$(M_unit)_$(Step).par;\
-	hotcross.dat=out/$Fn(input).hotcross_$(M_unit)_$(Step).dat;\
-	spectrum.h5=out/$Fn(input).spectrum_$(M_unit)_$(Step).h5"
+	grmonty.par=out/$Fn(input).grmonty_$(M_unit)_$(R_high)_$(bias)_$(Step).par;\
+	hotcross.dat=out/$Fn(input).hotcross_$(M_unit)_$(R_high)_$(bias)_$(Step).dat;\
+	spectrum.h5=out/$Fn(input).spectrum_$(M_unit)_$(R_high)_$(bias)_$(Step).h5"
 
-output = log/$Fn(input).grmonty_$(M_unit)_$(Step).out
-error  = log/$Fn(input).grmonty_$(M_unit)_$(Step).err
-log    = log/$Fn(input).grmonty_$(M_unit)_$(Step).log
+output = log/$Fn(input).grmonty_$(M_unit)_$(R_high)_$(bias)_$(Step).out
+error  = log/$Fn(input).grmonty_$(M_unit)_$(R_high)_$(bias)_$(Step).err
+log    = log/$Fn(input).grmonty_$(M_unit)_$(R_high)_$(bias)_$(Step).log
 
 universe       = vanilla
 request_memory = 2 GB
@@ -47,4 +47,4 @@ request_cpus   = 1
 on_exit_hold     = (ExitBySignal == True) || (ExitCode > 1)
 periodic_release = (NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
-queue 8 input,M_unit from bin/pargen |
+queue 8 input,M_unit,R_high,bias from bin/pargen |

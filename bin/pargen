@@ -15,8 +15,12 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
-for m in 1.0e16 2.0e16 5.0e16 1.0e17; do
-	for f in dat/*.h5; do
-		echo $f,$m
-	done
+for b in 0.01 0.03 0.1 0.3; do
+for R in 1 3 10; do
+for m in 3e16 1e17 3e17 1e18 3e18; do
+for f in dat/*.h5; do
+	echo $f,$m,$R,$b
+done
+done
+done
 done
