@@ -34,7 +34,7 @@ set -e
 
 dump="$1"
 M_unit="$2"
-TP_OVER_TE="${3:-3.0}" # NOTE that ':-' indicates the default '3.0'
+trat_large="${3:-3.0}" # NOTE that ':-' indicates the default '3.0'
 bias="${4:-0.5}"       # NOTE that ':-' indicates the default '0.5'
 
 cat <<EOF | tee grmonty.par
@@ -49,7 +49,7 @@ Ns          10000
 MBH         4.3e+6
 M_unit      ${M_unit}
 
-TP_OVER_TE  ${TP_OVER_TE}
+trat_large  ${trat_large}
 dump        ${dump}
 spectrum    spectrum.h5
 EOF
