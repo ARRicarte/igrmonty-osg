@@ -47,7 +47,7 @@ bias        ${bias}
 ratio       1.414
 
 Ns          10000
-MBH         4.3e+6
+MBH         4.14e+6
 M_unit      ${M_unit}
 
 trat_large  ${trat_large}
