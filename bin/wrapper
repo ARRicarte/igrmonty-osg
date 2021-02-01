@@ -36,7 +36,7 @@ set -e
 dump="$1"
 M_unit="$2"
 trat_large="${3:-3.0}" # NOTE that ':-' indicates the default '3.0'
-bias="${4:-0.5}"       # NOTE that ':-' indicates the default '0.5'
+bias="${4:-0.1}"       # NOTE that ':-' indicates the default '0.1'
 
 cat <<EOF | tee grmonty.par
 # Automatically generated \`grmonty\` parameter file
