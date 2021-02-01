@@ -40,7 +40,7 @@ error  = log/$Fn(input).grmonty_$(M_unit)_$(Step).err
 log    = log/$Fn(input).grmonty_$(M_unit)_$(Step).log
 
 universe       = vanilla
-request_memory = 1 GB
+request_memory = 2 GB
 request_disk   = 1 GB
 request_cpus   = 1
 
