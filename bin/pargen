@@ -15,8 +15,9 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
-for m in 1.0e16 2.0e16 5.0e16 1.0e17; do
-	for f in dat/*.h5; do
-		echo $f,$m
-	done
+d=grmhd_Sa0
+
+for f in /public/arashr/eht/sgra/${d}/*.h5; do
+	# input,Rhigh,inc,Munit,bias
+	echo http://stash.osgconnect.net${f},1,70,7.39802e+19,0.0894
 done

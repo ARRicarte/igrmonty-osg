@@ -33,25 +33,23 @@ fi
 set -e
 #ulimit -s 16384
 
-dump="$1"
-M_unit="$2"
-trat_large="${3:-3.0}" # NOTE that ':-' indicates the default '3.0'
-bias="${4:-0.1}"       # NOTE that ':-' indicates the default '0.1'
+input="$1"
+Munit="$2"
+Rhigh="$3"
+bias="$4"
 
 cat <<EOF | tee grmonty.par
 # Automatically generated \`grmonty\` parameter file
 
-fit_bias    1
-fit_bias_ns 10000
+fit_bias    0
 bias        ${bias}
-ratio       1.414
 
 Ns          10000
 MBH         4.14e+6
-M_unit      ${M_unit}
+M_unit      ${Munit}
 
-trat_large  ${trat_large}
-dump        ${dump}
+trat_large  ${Rhigh}
+dump        ${input}
 spectrum    spectrum.h5
 EOF
 
