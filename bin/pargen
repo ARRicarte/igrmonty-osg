@@ -30,7 +30,7 @@ for f in "/public/ckc/eht/sgra/${d}/"torus.out0.*0.h5; do
 	awk '{print $2","$1","$4}' "${d}-tmp.tsv" | while read p; do
 		# input,Rhigh,inc,Munit,bias
 		Rh=$(echo $p | cut -d, -f1)
-		bias=$(grep ${Rh} "/public/ckc/eht/sgra/bias_${d}.txt" | cut -f2)
+		bias=$(grep "$Rh	" "/public/ckc/eht/sgra/bias_${d}.txt" | cut -f2)
 		echo http://stash.osgconnect.net${f},${t},${p},${bias}
 	done
 
