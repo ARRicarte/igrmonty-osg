@@ -17,7 +17,7 @@
 
 d=$(basename $PWD | cut -d_ -f1)
 
-for f in "/public/ckc/eht/sgra/${d}/"torus.out0.*.h5; do
+for f in "/public/ckc/eht/sgra/${d}/"torus.out0.*0.h5; do
 	t=$(basename "$f" ".h5" | cut -d. -f3)
 	s=$(expr "$t" / 1000 \* 1000)
 	grep "	$s	" "/public/ckc/eht/sgra/munits_${d}.txt" > "${d}-tmp.tsv"
