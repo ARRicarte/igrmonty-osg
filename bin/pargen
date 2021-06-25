@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Copyright 2020 Chi-kwan Chan
-# Copyright 2020 Steward Observatory
+# Copyright 2021 Chi-kwan Chan
+# Copyright 2021 Steward Observatory
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you
 # may not use this file except in compliance with the License.  You
@@ -15,9 +15,24 @@
 # implied.  See the License for the specific language governing
 # permissions and limitations under the License.
 
-d=grmhd_Sa0
+d=$(basename $PWD | cut -d_ -f1)
 
-for f in /public/arashr/eht/sgra/${d}/*.h5; do
-	# input,Rhigh,inc,Munit,bias
-	echo http://stash.osgconnect.net${f},1,70,7.39802e+19,0.0894
+for f in "/public/ckc/eht/sgra/${d}/"torus.out0.*.h5; do
+	t=$(basename "$f" ".h5" | cut -d. -f3)
+	s=$(expr "$t" / 1000 \* 1000)
+	grep "	$s	" "/public/ckc/eht/sgra/munits_${d}.txt" > "${d}-tmp.tsv"
+
+	if [ $(cat "${d}-tmp.tsv" | wc -l) -ne 36 ]; then
+	    echo 'ERROR!!!'
+	    break
+	fi
+
+	awk '{print $2","$1","$4}' "${d}-tmp.tsv" | while read p; do
+		# input,Rhigh,inc,Munit,bias
+		Rh=$(echo $p | cut -d, -f1)
+		bias=$(grep ${Rh} "/public/ckc/eht/sgra/bias_${d}.txt" | cut -f2)
+		echo http://stash.osgconnect.net${f},${t},${p},${bias}
+	done
+
+	rm "${d}-tmp.tsv"
 done
