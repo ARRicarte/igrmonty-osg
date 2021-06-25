@@ -45,4 +45,4 @@ request_cpus   = 1
 on_exit_hold     = (ExitBySignal == True) || (ExitCode > 1)
 periodic_release = (NumJobStarts < 3) && ((CurrentTime - EnteredCurrentStatus) > 60)
 
-queue 16 input,snapshot,Rhigh,inc,Munit,bias from bin/pargen |
+queue 16 input,snapshot,Rhigh,inc,Munit,bias from bin/parget |
