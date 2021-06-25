@@ -24,7 +24,7 @@
 
 if test $# -lt 2; then
 	cat <<EOF
-usage: $0 <input> <M_unit> [Tp/Te] [init_bias_scale]
+usage: $0 <input> [Tp/Te] <M_unit> [init_bias_scale]
 a wrapper to run \`grmonty\` on the Open Science Grid with HTCondor
 EOF
 	exit 1
@@ -34,8 +34,8 @@ set -e
 #ulimit -s 16384
 
 input="$1"
-Munit="$2"
-Rhigh="$3"
+Rhigh="$2"
+Munit="$3"
 bias="$4"
 
 cat <<EOF | tee grmonty.par

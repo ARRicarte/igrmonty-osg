@@ -26,7 +26,7 @@
 # or run as a command directly `bin/submit`.
 
 executable = wrapper
-arguments  = $Fnx(input) $(Rhigh) $(inc) $(Munit) $(bias)
+arguments  = $Fnx(input) $(Rhigh) $(Munit) $(bias)
 
 transfer_executable    = False
 transfer_input_files   = bin/,$(input)
