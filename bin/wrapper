@@ -24,19 +24,36 @@
 
 if test $# -lt 2; then
 	cat <<EOF
-usage: $0 <input> [Tp/Te] <M_unit> [init_bias_scale]
+usage: $0 <input> <input_md5> <Tp/Te> <M_unit> <bias_scale>
 a wrapper to run \`grmonty\` on the Open Science Grid with HTCondor
 EOF
 	exit 1
 fi
 
 set -e
-#ulimit -s 16384
+
+grmonty="$(dirname "$0")/grmonty"
+grmd5="22691ef253e109166acb1eb5d5ac1084"
 
 input="$1"
-Rhigh="$2"
-Munit="$3"
-bias="$4"
+inmd5="$2"
+Rhigh="$3"
+rho0="$4"
+bias="$5"
+
+mymd5=$(md5sum "${grmonty}" | cut -d' ' -f1)
+if [ x"$mymd5" == x"$grmd5" ]; then
+	>&2 echo "md5("${grmonty}") == ${mymd5} == ${grmd5}"
+else
+	>&2 echo "WARNING: md5("${grmonty}") == ${mymd5} != ${grmd5}"
+fi
+
+mymd5=$(md5sum "${input}" | cut -d' ' -f1)
+if [ x"$mymd5" == x"$inmd5" ]; then
+	>&2 echo "md5(${input}) == ${mymd5} == ${inmd5}"
+else
+	>&2 echo "WARNING: md5(${input}) == ${mymd5} != ${inmd5}"
+fi
 
 cat <<EOF | tee grmonty.par
 # Automatically generated \`grmonty\` parameter file
@@ -46,11 +63,19 @@ bias        ${bias}
 
 Ns          10000
 MBH         4.14e+6
-M_unit      ${Munit}
+M_unit      ${rho0}
 
 trat_large  ${Rhigh}
 dump        ${input}
 spectrum    spectrum.h5
 EOF
 
-"$(dirname "$0")/grmonty" -par grmonty.par
+mymd5=$(md5sum "grmonty.par" | cut -d' ' -f1)
+>&2 echo "md5(grmonty.par) == ${mymd5}"
+
+"${grmonty}" -par grmonty.par
+
+mymd5=$(md5sum "specrum.h5" | cut -d' ' -f1)
+>&2 echo "md5(specrum.h5) == ${mymd5}"
+
+rm grmonty.par
