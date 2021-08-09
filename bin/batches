@@ -16,24 +16,24 @@
 # permissions and limitations under the License.
 
 if [ ! -f par/BATCH.ALL ]; then
-    echo 'Generate parameter file'
-    bin/pargen > par/BATCH.ALL
+	echo 'Generate parameter file'
+	bin/pargen > par/BATCH.ALL
 fi
 
 if [ ! -f par/*.?00 ]; then
-    echo 'Split parameter file'
-    split -da02 -l512 par/BATCH.ALL par/batch.p
+	echo 'Split parameter file'
+	split -da02 -l300 par/BATCH.ALL par/batch.p
 fi
 
 echo 'Submit jobs'
 for f in par/batch.p??; do
-    g="par/BATCH.D${f#par/batch.p}"
-    echo -n "$f -> $g"
-    bin/submit
-    if [ $? == 1 ]; then
-	echo STOP
-	break # submission error
-    fi
-    mv -f "$f" "$g"
-    echo 'DONE'
+	g="par/BATCH.D${f#par/batch.p}"
+	echo -n "$f -> $g"
+	bin/submit
+	if [ $? == 1 ]; then
+		echo STOP
+		break # submission error
+	fi
+	mv -f "$f" "$g"
+	echo 'DONE'
 done
