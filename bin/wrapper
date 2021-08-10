@@ -75,7 +75,7 @@ mymd5=$(md5sum "grmonty.par" | cut -d' ' -f1)
 
 "${grmonty}" -par grmonty.par
 
-mymd5=$(md5sum "specrum.h5" | cut -d' ' -f1)
->&2 echo "md5(specrum.h5) == ${mymd5}"
+mymd5=$(md5sum "spectrum.h5" | cut -d' ' -f1)
+>&2 echo "md5(spectrum.h5) == ${mymd5}"
 
 rm grmonty.par
