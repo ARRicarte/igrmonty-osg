@@ -69,6 +69,7 @@ M_unit      ${rho0}
 beta_crit_coefficient ${beta_crit_coefficient}
 beta_crit   ${beta_crit}
 dump        ${input}
+with_electrons 3
 spectrum    spectrum.h5
 EOF
 
