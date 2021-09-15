@@ -26,16 +26,16 @@
 # or run as a command directly `bin/submit`.
 
 executable = wrapper
-arguments  = $Fnx(input) $(md5) $(Rhigh) $(rho0) $(bias)
+arguments  = $Fnx(input) $(md5) $(beta_crit_coefficient) $(beta_crit) $(rho0) $(bias)
 
 transfer_executable    = False
 transfer_input_files   = bin/,$(input)
 transfer_output_remaps = "\
-	spectrum.h5=out/sed_s$(snapshot)_Rh$(Rhigh)_i$(inc)_r$(Step).h5"
+	spectrum.h5=out/sed_s$(snapshot)_f$(beta_crit_coefficient)_bc$(beta_crit)_i$(inc)_r$(Step).h5"
 
-output = log/sed_s$(snapshot)_Rh$(Rhigh)_i$(inc)_r$(Step).out
-error  = log/sed_s$(snapshot)_Rh$(Rhigh)_i$(inc)_r$(Step).err
-log    = log/sed_s$(snapshot)_Rh$(Rhigh)_i$(inc)_r$(Step).log
+output = log/sed_s$(snapshot)_f$(beta_crit_coefficient)_bc$(beta_crit)_i$(inc)_r$(Step).out
+error  = log/sed_s$(snapshot)_f$(beta_crit_coefficient)_bc$(beta_crit)_i$(inc)_r$(Step).err
+log    = log/sed_s$(snapshot)_f$(beta_crit_coefficient)_bc$(beta_crit)_i$(inc)_r$(Step).log
 
 universe       = vanilla
 request_memory = 2 GB
@@ -46,4 +46,4 @@ on_exit_hold     = (ExitBySignal == True) || (ExitCode > 1)
 periodic_hold    = ((CurrentTime - EnteredCurrentStatus) > 28800) && (JobStatus == 2)
 periodic_release = ((CurrentTime - EnteredCurrentStatus) > 60)    && (NumJobStarts < 5)
 
-queue 16 input,md5,snapshot,Rhigh,inc,rho0,bias from bin/parget |
+queue 16 input,md5,snapshot,beta_crit_coefficient,beta_crit,inc,rho0,bias from bin/parget |
